@@ -1,0 +1,6 @@
+﻿data/arXiv_scientific_dataset.csv
+__pycache__/
+*.py[cod]
+.env
+.DS_Store
+Thumbs.db
