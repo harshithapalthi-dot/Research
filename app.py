@@ -21,7 +21,6 @@ META_PATH = BASE_DIR / "models" / "metadata.json"
 # ──────────────────────────────────────────────────────────────────────────────
 # Paths
 # ──────────────────────────────────────────────────────────────────────────────
-from huggingface_hub import hf_hub_download
 
 @st.cache_resource(show_spinner="Downloading ML model...")
 def load_model():
@@ -61,21 +60,6 @@ def clean_text(text: str) -> str:
 # ──────────────────────────────────────────────────────────────────────────────
 # Load model + metadata (cached so they load once per session)
 # ──────────────────────────────────────────────────────────────────────────────
-
-@st.cache_resource(show_spinner="Loading ML pipeline…")
-def load_model():
-    if not MODEL_PATH.exists():
-        return None, (
-            f"Model file not found at `{MODEL_PATH}`.\n\n"
-            "Please run `python train_model.py` first to train and save the model."
-        )
-    try:
-        pipeline = joblib.load(MODEL_PATH)
-        return pipeline, None
-    except Exception as exc:
-        return None, f"Error loading model: {exc}"
-        
-
 
 @st.cache_data(show_spinner=False)
 def load_metadata() -> dict:
