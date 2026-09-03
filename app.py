@@ -21,7 +21,22 @@ META_PATH = BASE_DIR / "models" / "metadata.json"
 # ──────────────────────────────────────────────────────────────────────────────
 # Paths
 # ──────────────────────────────────────────────────────────────────────────────
-joblib.load(MODEL_PATH)
+from huggingface_hub import hf_hub_download
+
+@st.cache_resource(show_spinner="Downloading ML model...")
+def load_model():
+    try:
+        model_file = hf_hub_download(
+            repo_id="harsh12345678910/research-paper-classifier-model",
+            filename="model.pkl",
+            repo_type="model"
+        )
+
+        pipeline = joblib.load(model_file)
+        return pipeline, None
+
+    except Exception as exc:
+        return None, f"Error loading model: {exc}"
 # ──────────────────────────────────────────────────────────────────────────────
 # Page config
 # ──────────────────────────────────────────────────────────────────────────────
