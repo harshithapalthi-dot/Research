@@ -11,13 +11,17 @@ from pathlib import Path
 
 import joblib
 import streamlit as st
+from huggingface_hub import hf_hub_download
+
+BASE_DIR = Path(__file__).resolve().parent
+
+MODEL_PATH = BASE_DIR / "models" / "model.pkl"
+META_PATH = BASE_DIR / "models" / "metadata.json"
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Paths
 # ──────────────────────────────────────────────────────────────────────────────
-MODEL_PATH = Path("models") / "model.pkl"
-META_PATH  = Path("models") / "metadata.json"
-
+joblib.load(MODEL_PATH)
 # ──────────────────────────────────────────────────────────────────────────────
 # Page config
 # ──────────────────────────────────────────────────────────────────────────────
@@ -55,6 +59,7 @@ def load_model():
         return pipeline, None
     except Exception as exc:
         return None, f"Error loading model: {exc}"
+        
 
 
 @st.cache_data(show_spinner=False)
@@ -242,3 +247,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
