@@ -1,0 +1,40 @@
+{
+  "dataset": "arXiv_scientific_dataset.csv",
+  "target_column": "category",
+  "problem_type": "Multiclass Classification",
+  "text_features": "title + summary (combined)",
+  "n_classes": 120,
+  "n_train": 42410,
+  "n_test": 10603,
+  "best_model": "Linear SVM (calibrated)",
+  "metrics": {
+    "accuracy": 0.6337,
+    "precision": 0.6191,
+    "recall": 0.6337,
+    "f1": 0.621
+  },
+  "all_model_results": [
+    {
+      "name": "Logistic Regression",
+      "accuracy": 0.6126,
+      "precision": 0.6012,
+      "recall": 0.6126,
+      "f1": 0.5939
+    },
+    {
+      "name": "Linear SVM (calibrated)",
+      "accuracy": 0.6337,
+      "precision": 0.6191,
+      "recall": 0.6337,
+      "f1": 0.621
+    },
+    {
+      "name": "Multinomial Naive Bayes",
+      "accuracy": 0.5217,
+      "precision": 0.5187,
+      "recall": 0.5217,
+      "f1": 0.4784
+    }
+  ],
+  "sampling_strategy": "Per-class cap of 2000 rows; classes with < 10 samples removed."
+}
